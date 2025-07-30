@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>chat demo</title>
+</head>
+<body>
+    <ul id="messages">
+
+    </ul>
+    <input type="text" id="m" autocomplete="off"> <button>发送</button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      document.querySelector("button").onclick = ()=> {
+        const msg = document.getElementById('m').value;
+        socket.emit("chat message", msg);
+      }
+      socket.on('chat message', (msg) => {
+        const li = document.createElement('li');
+        li.textContent = msg;
+        document.getElementById('messages').appendChild(li); // 显示消息
+      });
+    </script>
+</body>
+</html>
