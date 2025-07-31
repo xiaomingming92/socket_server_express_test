@@ -5,7 +5,7 @@ export const registerChatHandler = (socket: CustomSocket) => {
     console.log("新消息", msg);
     socket.broadcast.emit("chat message", msg);
   });
-  socket.on("disconnect", () => {
-    console.log("socket disconnect", socket.id);
+  socket.on("disconnect", (reason: string) => {
+    console.log(`socket disconnect:${socket.id}, 原因：${reason}`);
   });
 };
